@@ -5,18 +5,17 @@
 | **_Overview_:** |
 |---|
 #### A forex app, for those who like to move money, globally.
-##### Notes: 
+**Notes:** Only converts from USD to selected currency.
 
 
 #### Technologies Used:
 ![image](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
-![image](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white) ![image](https://img.shields.io/badge/json-5E5C5C?style=for-the-badge&logo=json&logoColor=white) 
-![image](	https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white)  ![image](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
+![image](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white) ![image](https://img.shields.io/badge/json-5E5C5C?style=for-the-badge&logo=json&logoColor=white)  ![image](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
 ![image](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)  ![image](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![image](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)
 ---
 
-#### Description:
+#### Description: Overall, this application works, and can easily introduce a new drop-down selection in lieu of just the "almighty US Dollar"	:dollar: to have more accessibility. I will still need to improve my error handling as I am not quite sure how to present specific error number codes from .catch to the DOM.
 
 ##### **My primary objectives** outside of the prompt were:
 - Be more dynamic with the DOM and the API object together.
@@ -24,7 +23,8 @@
 - Always DRY.
 
 ##### **My ultimate objective was** to:
-- Make an app thats dynamic enough to convert any currency minus crypto.
+- Make an app thats capable enough to convert any currency minus crypto.
+- Make an app capable of easily configuring components (to easily add more features later).
 - Use arrow functions as often as possible.
 
 ---
@@ -38,13 +38,13 @@
 - Follow the prompt, and create a password. You will be sent a confirmation email which you must use to activate your account. (It may be found in your "promotions" or "spam" folder, if not your primary folder.)
 - Once clicking the activation link, you'll be able to access a dashboard that includes your API key as well as your remaining API calls for the month.
 - In the instructions below, we will store and .gitignore your key in a `.env` file and in your code it will be assigned to `process.env.API_KEY`.
-- Install package to load environment variables from .env with `npm install dotenv-webpack@2.0.0 --save-dev`.
 
 ##### 	:exclamation: Once you've received this repo on your computer:
 - Install the node_modules directory (node: `npm install` or yarn: `yarn install`).
+- Install package to load environment variables from .env with `npm install dotenv-webpack@2.0.0 --save-dev`.
 - Bundle the code, and run the program via server. (node: `npm run start` or yarn: `yarn run start`).
 
-####   (More detailed instructions provided below.)
+####   More detailed instructions provided below:
 
 |   via CLI   |  via Download  |
 |---|---|
@@ -68,12 +68,12 @@
 | **_Design Plan_ (Specs):** |
 |---|
 #### Create:
-- [ ] USA Rate (some sort of indicator).
-- [ ] Drop-down Country Selector "Converted amount" x 5
-- [ ] class for fetching API and error handling.
+- [x] USA Rate (some sort of indicator).
+- [x] Drop-down Country Selector "Converted amount" x 5
+- [x] class for fetching API and error handling.
 - [ ] If time: Drop-down Country Selector "Exchange from".
 - [ ] One of those "swappy" things to swap to-and-from currencies.
-- [ ] Return Error in output.
+- [?] Return Error in output.
 
 #### Objects/Classes, Properties:
 - Currency
@@ -84,7 +84,8 @@
 - none at present moment.
 
 #### Behaviours/Interactivity:
-- Currency.getExchangeRate()
+- Exchange.getRate()
+- convertCash()
 
 Errors:
 - display <div class=errors/><h4/>error.message<p/>I'm sorry...
@@ -93,7 +94,7 @@ Errors:
 UI:
 - Select country for conversion.
 - Display output.
-
+- error display
 
 
 ---
