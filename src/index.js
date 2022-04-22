@@ -26,12 +26,11 @@ const convertMoney = () => {
 
         // let targetSelector = converted[responseKeys][targetCode];
         let conversionRate = response["conversion_rates"][currency.target];
-        console.log(conversionRate);
 
         //async use for fetched data
         displayResults(currency.amount, baseCurrencyCode, conversionRate, targetCurrencyCode);
-        console.log(`from 1 ${baseCurrencyCode} to ${conversionRate} ${targetCurrencyCode}.`);
-      });
+      })
+      .catch(error => displayError(error));
   });
 };
 
@@ -60,6 +59,16 @@ const resetResults = () =>{
     output.removeChild(output.firstElementChild);
   }
   return output;
+};
+
+const displayError = (error) => {
+  let output = document.querySelector(".output");
+  let div = document.createElement("div");
+  output.append(div);
+  div.innerHTML = `
+    <h3>Sorry! Something went wrong: </h3>
+    <h4>${error.message}</h4>
+    `;
 };
 
 convertMoney();
