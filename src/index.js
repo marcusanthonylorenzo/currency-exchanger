@@ -6,8 +6,6 @@ const convertMoney = () => {
   const button = document.getElementById("getRateBtn");
   button.addEventListener("click", () => {
     resetResults();
-
-    //get select option value
     let input = document.getElementById("selectCountry");
     const currency = {
       amount: document.getElementById("amount").value,
@@ -15,7 +13,7 @@ const convertMoney = () => {
       target: input.options[input.selectedIndex].value,
     };
     let convertFrom = currency.primary;
-
+    
     if(currency.amount.length === 0){
       let error = "Please enter an amount.";
       displayError(error);
@@ -31,7 +29,7 @@ const convertMoney = () => {
         displayResults(currency.amount, baseCurrencyCode, conversionRate, targetCurrencyCode);
       })
       .catch((error) => {
-        error = "Incorrect base currency selected, please select a valid currency";
+        error = "Unable to fetch data, please check your API key is correct, or your internet is connected.";
         displayError(error);
         return error;
       });
@@ -41,7 +39,10 @@ const convertMoney = () => {
 const displayResults = (baseAmount, baseCode, targetRate, targetCode) => {
   let exchanged = convertCash(baseAmount, targetRate);
   if(isNaN(baseAmount) || isNaN(targetRate)){
-    let error = `Please make sure you've selected an existing currency.`;
+    let error = `
+    <p>Please make sure you've selected an existing currency.</p>
+    <p>(We've included some obsolete currencies here for novelty.)</p>
+    `;
     displayError(error);
     return displayResults;
   }

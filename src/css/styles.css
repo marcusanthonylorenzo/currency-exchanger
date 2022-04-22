@@ -1,16 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@800&display=swap');
+
 .container {
-  background-color: rgba(27, 95, 83, 0.471);
+  background-color: rgba(202, 90, 37, 0.471);
   display: flex;
   flex-direction: column;
-  margin: 10vh;
   width: 100%;
   height: 100%;
   justify-content: center;
   align-items: center;
+  font-family: "Alegreya";
 }
 
 .main {
-  margin: 10vw;
+  margin: 6vw;
 }
 
 .forexConversion {
@@ -24,7 +26,7 @@
 
 input {
   height: 3rem;
-  width: 3rem;
+  width: 6rem;
 }
 
 .enterAmt{
@@ -33,11 +35,13 @@ input {
 
 select {
   height: 1.6rem;
+  width: 15rem;
 }
 
 .button {
   display: flex;
   justify-content: center;
+  height: 3rem;
   padding: 2rem;
 }
 
@@ -48,5 +52,6 @@ select {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 1em;
+  margin: .5em;
+  text-align: center;
 }
