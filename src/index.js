@@ -3,12 +3,12 @@ import Exchange from "./js/exchange.js";
 import { convertCash } from "./js/business-logic.js";
 
 //DOM output: Rate from, Rate to, Timestamp "as of";
-//error handling
 
 const convertMoney = () => {
   const button = document.getElementById("getRateBtn");
   button.addEventListener("click", () => {
     resetResults();
+
     //get select option value
     let input = document.getElementById("selectCountry");
     const currency = {
@@ -16,21 +16,27 @@ const convertMoney = () => {
       primary: "USD",
       target: input.options[input.selectedIndex].value,
     };
-    console.log(currency.amount, currency.primary, currency.target);
     let convertFrom = currency.primary;
+
+    if(currency.amount.length === 0){
+      let error = "Please enter an amount.";
+      displayError(error);
+      return convertMoney;
+    }
 
     Exchange.getRate(convertFrom)
       .then((response) => {
         let baseCurrencyCode = response["base_code"];
         let targetCurrencyCode = currency.target;
-
-        // let targetSelector = converted[responseKeys][targetCode];
         let conversionRate = response["conversion_rates"][currency.target];
 
         //async use for fetched data
         displayResults(currency.amount, baseCurrencyCode, conversionRate, targetCurrencyCode);
       })
-      .catch(error => displayError(error));
+      .catch((error) => {
+        error = "Incorrect base currency selected, please select a valid currency";
+        displayError(error);
+      });
   });
 };
 
@@ -38,11 +44,10 @@ const displayResults = (baseAmount, baseCode, targetRate, targetCode) => {
   let exchanged = convertCash(baseAmount, targetRate);
 
   if(isNaN(baseAmount) || isNaN(targetRate)){
-    let error = `Please make sure you've entered a proper number and select a currency.`;
+    let error = `Please make sure you've selected a currency.`;
     displayError(error);
     return displayResults;
   }
-
   let output = document.querySelector(".output");
   let baseH1 = document.createElement("h1");
   let baseH4 = document.createElement("h4");
@@ -52,7 +57,7 @@ const displayResults = (baseAmount, baseCode, targetRate, targetCode) => {
   output.append(baseH1, baseH4);
   output.append(equals);
   output.append(convertedH1, convertedH4);
-  //placeholder value for baseH1 later.
+
   baseH1.textContent = baseAmount;
   baseH4.textContent = baseCode;
   equals.textContent = "is equal to";

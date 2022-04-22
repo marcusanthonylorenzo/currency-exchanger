@@ -6,6 +6,20 @@
   align-items: center;
 }
 
+.main {
+  width: 60vw;
+  margin: 10vw;
+}
+
+.forexConversion {
+  display: flex;
+  flex-direction: column;
+}
+
+.input{
+  display: flex;
+  flex-direction: column;
+}
 .output {
   display: flex;
   justify-content: center;
