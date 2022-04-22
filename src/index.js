@@ -36,6 +36,13 @@ const convertMoney = () => {
 
 const displayResults = (baseAmount, baseCode, targetRate, targetCode) => {
   let exchanged = convertCash(baseAmount, targetRate);
+
+  if(isNaN(baseAmount) || isNaN(targetRate)){
+    let error = `Please make sure you've entered a proper number and select a currency.`;
+    displayError(error);
+    return displayResults;
+  }
+
   let output = document.querySelector(".output");
   let baseH1 = document.createElement("h1");
   let baseH4 = document.createElement("h4");
@@ -67,7 +74,7 @@ const displayError = (error) => {
   output.append(div);
   div.innerHTML = `
     <h3>Sorry! Something went wrong: </h3>
-    <h4>${error.message}</h4>
+    <h4>${error}</h4>
     `;
 };
 

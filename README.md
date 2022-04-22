@@ -21,11 +21,11 @@
 ##### **My primary objectives** outside of the prompt were:
 - Be more dynamic with the DOM and the API object together.
 - Try to use objects to store data via key/value rather than just pure variables or arrays.
-- Always DRY
+- Always DRY.
 
 ##### **My ultimate objective was** to:
 - Make an app thats dynamic enough to convert any currency minus crypto.
-
+- Use arrow functions as often as possible.
 
 ---
 
