@@ -2,8 +2,6 @@ import "./css/styles.css";
 import Exchange from "./js/exchange.js";
 import { convertCash } from "./js/business-logic.js";
 
-//DOM output: Rate from, Rate to, Timestamp "as of";
-
 const convertMoney = () => {
   const button = document.getElementById("getRateBtn");
   button.addEventListener("click", () => {
@@ -29,22 +27,21 @@ const convertMoney = () => {
         let baseCurrencyCode = response["base_code"];
         let targetCurrencyCode = currency.target;
         let conversionRate = response["conversion_rates"][currency.target];
-
         //async use for fetched data
         displayResults(currency.amount, baseCurrencyCode, conversionRate, targetCurrencyCode);
       })
       .catch((error) => {
         error = "Incorrect base currency selected, please select a valid currency";
         displayError(error);
+        return error;
       });
   });
 };
 
 const displayResults = (baseAmount, baseCode, targetRate, targetCode) => {
   let exchanged = convertCash(baseAmount, targetRate);
-
   if(isNaN(baseAmount) || isNaN(targetRate)){
-    let error = `Please make sure you've selected a currency.`;
+    let error = `Please make sure you've selected an existing currency.`;
     displayError(error);
     return displayResults;
   }

@@ -1,30 +1,52 @@
 .container {
+  background-color: rgba(27, 95, 83, 0.471);
   display: flex;
   flex-direction: column;
   margin: 10vh;
+  width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
 }
 
 .main {
-  width: 60vw;
   margin: 10vw;
 }
 
 .forexConversion {
   display: flex;
-  flex-direction: column;
+  margin: 1.4rem;
 }
 
 .input{
   display: flex;
-  flex-direction: column;
 }
+
+input {
+  height: 3rem;
+  width: 3rem;
+}
+
+.enterAmt{
+  padding: 2rem;
+}
+
+select {
+  height: 1.6rem;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
 .output {
   display: flex;
   justify-content: center;
+  margin-bottom: 5rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 2em;
+  margin: 1em;
 }
