@@ -1,8 +1,7 @@
 import "./css/styles.css";
 import Exchange from "./js/exchange.js";
+import { convertCash } from "./js/business-logic.js";
 
-//Country selector via Base Code
-//Convert selector via other fetch?
 //DOM output: Rate from, Rate to, Timestamp "as of";
 //error handling
 
@@ -13,10 +12,11 @@ const convertMoney = () => {
     //get select option value
     let input = document.getElementById("selectCountry");
     const currency = {
+      amount: document.getElementById("amount").value,
       primary: "USD",
       target: input.options[input.selectedIndex].value,
     };
-    console.log(currency.primary, currency.target);
+    console.log(currency.amount, currency.primary, currency.target);
     let convertFrom = currency.primary;
 
     Exchange.getRate(convertFrom)
@@ -29,13 +29,14 @@ const convertMoney = () => {
         console.log(conversionRate);
 
         //async use for fetched data
-        displayResults(baseCurrencyCode, conversionRate, targetCurrencyCode);
+        displayResults(currency.amount, baseCurrencyCode, conversionRate, targetCurrencyCode);
         console.log(`from 1 ${baseCurrencyCode} to ${conversionRate} ${targetCurrencyCode}.`);
       });
   });
 };
 
-const displayResults = (baseCode, targetRate, targetCode) => {
+const displayResults = (baseAmount, baseCode, targetRate, targetCode) => {
+  let exchanged = convertCash(baseAmount, targetRate);
   let output = document.querySelector(".output");
   let baseH1 = document.createElement("h1");
   let baseH4 = document.createElement("h4");
@@ -46,10 +47,10 @@ const displayResults = (baseCode, targetRate, targetCode) => {
   output.append(equals);
   output.append(convertedH1, convertedH4);
   //placeholder value for baseH1 later.
-  baseH1.textContent = "1";
+  baseH1.textContent = baseAmount;
   baseH4.textContent = baseCode;
   equals.textContent = "is equal to";
-  convertedH1.textContent = targetRate;
+  convertedH1.textContent = exchanged;
   convertedH4.textContent = targetCode;
 };
 
