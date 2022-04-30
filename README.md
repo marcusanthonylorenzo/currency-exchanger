@@ -5,7 +5,7 @@
 | **_Overview_:** |
 |---|
 #### A forex app, for those who like to move money, globally.
-**Notes:** Only converts from USD to selected currency.
+**Notes:** Only updates exchange rate from 00:01am on the day.
 
 
 #### Technologies Used:

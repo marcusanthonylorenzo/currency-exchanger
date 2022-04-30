@@ -6,14 +6,15 @@ const convertMoney = () => {
   const button = document.getElementById("getRateBtn");
   button.addEventListener("click", () => {
     resetResults();
-    let input = document.getElementById("selectCountry");
+    let input1 = document.getElementById("selectCountry1");
+    let input2 = document.getElementById("selectCountry2");
     const currency = {
       amount: document.getElementById("amount").value,
-      primary: "USD",
-      target: input.options[input.selectedIndex].value,
+      primary: input1.options[input1.selectedIndex].value,
+      target: input2.options[input2.selectedIndex].value,
     };
     let convertFrom = currency.primary;
-    
+
     if(currency.amount.length === 0){
       let error = "Please enter an amount.";
       displayError(error);
@@ -22,17 +23,21 @@ const convertMoney = () => {
 
     Exchange.getRate(convertFrom)
       .then((response) => {
-        let baseCurrencyCode = response["base_code"];
+        let baseCurrencyCode = response["base_code"][currency.primary];
         let targetCurrencyCode = currency.target;
         let conversionRate = response["conversion_rates"][currency.target];
+        console.log(response);
         //async use for fetched data
         displayResults(currency.amount, baseCurrencyCode, conversionRate, targetCurrencyCode);
       })
       .catch((error) => {
-        error = "Unable to fetch data, please check your API key is correct, or your internet is connected.";
+        error = "Unable to fetch data, please select a valid currency to convert from. If selected, please check your API key is correct, or your internet is connected.";
         displayError(error);
         return error;
       });
+    window.addEventListener('error', function(e) {
+      console.log(e);
+    }, true);
   });
 };
 
