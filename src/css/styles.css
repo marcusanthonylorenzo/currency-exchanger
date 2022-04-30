@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@800&display=swap');
 
 .container {
-  background-color: rgba(202, 90, 37, 0.471);
+  /* background-color: rgba(202, 90, 37, 0.471); */
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   font-family: "Alegreya";
+  margin-top: 16vh;
 }
 
 .main {
@@ -31,6 +32,7 @@ input {
 
 .enterAmt{
   padding: 2rem;
+  margin: auto;
 }
 
 select {
@@ -41,6 +43,7 @@ select {
 .button {
   display: flex;
   justify-content: center;
+  margin: auto;
   height: 3rem;
   padding: 2rem;
 }

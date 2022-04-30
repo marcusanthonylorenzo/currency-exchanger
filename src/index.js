@@ -3,6 +3,10 @@ import Exchange from "./js/exchange.js";
 import { convertCash } from "./js/business-logic.js";
 
 const convertMoney = () => {
+  const contain = document.querySelector(`.container`);
+  contain.style.backgroundImage = `url("https://t4.ftcdn.net/jpg/02/25/83/33/360_F_225833307_i6gw3VgVww9Pvi4vqEO6LsYK571cBGTj.jpg")`;
+  contain.style.boxShadow = `2px 2px 2px 2px`;
+
   const button = document.getElementById("getRateBtn");
   button.addEventListener("click", () => {
     resetResults();
@@ -23,7 +27,7 @@ const convertMoney = () => {
 
     Exchange.getRate(convertFrom)
       .then((response) => {
-        let baseCurrencyCode = response["base_code"][currency.primary];
+        let baseCurrencyCode = response["base_code"];
         let targetCurrencyCode = currency.target;
         let conversionRate = response["conversion_rates"][currency.target];
         console.log(response);
@@ -31,7 +35,11 @@ const convertMoney = () => {
         displayResults(currency.amount, baseCurrencyCode, conversionRate, targetCurrencyCode);
       })
       .catch((error) => {
-        error = "Unable to fetch data, please select a valid currency to convert from. If selected, please check your API key is correct, or your internet is connected.";
+        error = `
+        <p>Unable to fetch data, please select a valid currency to convert from.</p>
+        <p>(We've included some obsolete currencies here for novelty.)</p>
+        <p>If selected, please check your API key is correct, or your internet is connected.</p>
+        `;
         displayError(error);
         return error;
       });
@@ -41,16 +49,20 @@ const convertMoney = () => {
   });
 };
 
-const displayResults = (baseAmount, baseCode, targetRate, targetCode) => {
+const displayResults = async (baseAmount, baseCode, targetRate, targetCode) => {
   let exchanged = convertCash(baseAmount, targetRate);
   if(isNaN(baseAmount) || isNaN(targetRate)){
     let error = `
-    <p>Please make sure you've selected an existing currency.</p>
+    <p>Please make sure you've selected an existing currency to convert to.</p>
     <p>(We've included some obsolete currencies here for novelty.)</p>
+    <p>If selected, please check your API key is correct, or your internet is connected.</p>
     `;
     displayError(error);
     return displayResults;
   }
+  let getRateBtn = document.getElementById("getRateBtn");
+  await getRateBtn.setAttribute("disabled", true);
+
   let output = document.querySelector(".output");
   let baseH1 = document.createElement("h1");
   let baseH4 = document.createElement("h4");
@@ -66,6 +78,7 @@ const displayResults = (baseAmount, baseCode, targetRate, targetCode) => {
   equals.textContent = "is equal to";
   convertedH1.textContent = exchanged;
   convertedH4.textContent = targetCode;
+  getRateBtn.removeAttribute("disabled");
 };
 
 const resetResults = () =>{

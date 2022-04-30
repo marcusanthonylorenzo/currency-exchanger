@@ -5,7 +5,9 @@
 | **_Overview_:** |
 |---|
 #### A forex app, for those who like to move money, globally.
-**Notes:** Only updates exchange rate from 00:01am on the day.
+**Notes:**
+- I've used an open API key so that people can easily use the app on my GitHub Pages.
+- Only updates exchange rate from 00:01am on the day.
 
 
 #### Technologies Used:
